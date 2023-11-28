@@ -18,6 +18,7 @@ public class Programa {
  private static Scanner scanner = new Scanner(System.in);
 
  public static void main(String[] args) {
+    mock_object();
      int opcao;
      do {
          exibirMenu();
@@ -48,6 +49,25 @@ public class Programa {
      } while (opcao != 0);
  }
 
+ private static void mock_object() {
+    Cliente cliente = new Cliente("João", "Rua 1, 123");
+    Orcamento orcamento = new Orcamento(LocalDate.now(), 12, 30, 1000.0f, cliente);
+    orcamento.adicionarItem(new ItemOrcamento("Item 1", 100.0f));
+    orcamento.adicionarItem(new ItemOrcamento("Item 2", 200.0f));
+    orcamento.adicionarItem(new ItemOrcamento("Item 3", 300.0f));
+    orcamentos.add(orcamento);
+
+    // Add more objects
+    for (int i = 2; i <= 7; i++) {
+        cliente = new Cliente("Cliente " + i, "Rua " + i + ", 123");
+        orcamento = new Orcamento(LocalDate.now(), 12, 30, 1000.0f * i, cliente);
+        orcamento.adicionarItem(new ItemOrcamento("Item " + (i * 3 - 1), 100.0f * i));
+        orcamento.adicionarItem(new ItemOrcamento("Item " + (i * 3), 200.0f * i));
+        orcamento.adicionarItem(new ItemOrcamento("Item " + (i * 3 + 1), 300.0f * i));
+        orcamentos.add(orcamento);
+    }
+}
+
  private static void exibirMenu() {
      System.out.println("===== Menu =====");
      System.out.println("1. Adicionar Orçamento");
@@ -61,14 +81,14 @@ public class Programa {
 
  private static void adicionarOrcamento() {
      System.out.println("===== Adicionar Orçamento =====");
-
-     // Capturar dados do cliente
+     scanner.nextLine();
+     
      System.out.print("Nome do Cliente: ");
      String nomeCliente = scanner.nextLine();
-
+     
      System.out.print("Endereço do Cliente: ");
      String enderecoCliente = scanner.nextLine();
-
+     
      Cliente cliente = new Cliente(nomeCliente, enderecoCliente);
 
      // Capturar dados do orçamento
@@ -189,18 +209,18 @@ public class Programa {
  }
 
  private static void listarOrcamentos() {
-     System.out.println("===== Listar Orçamentos =====");
+    System.out.println("===== Listar Orçamentos =====");
 
-     if (orcamentos.isEmpty()) {
-         System.out.println("Não há orçamentos para listar.");
-     } else {
-         for (int i = 0; i < orcamentos.size(); i++) {
-             System.out.println("Orçamento #" + i);
-             orcamentos.get(i).imprimirOrcamento();
-             System.out.println();
-         }
-     }
- }
+    if (orcamentos.isEmpty()) {
+        System.out.println("Não há orçamentos para listar.");
+    } else {
+        for (int i = 0; i < orcamentos.size(); i++) {
+            System.out.println("Orçamento #" + i);
+            orcamentos.get(i).imprimirOrcamento(); // This will now also print the description
+            System.out.println();
+        }
+    }
+}
 
  private static void ordenarOrcamentos() {
      System.out.println("===== Ordenar Orçamentos =====");
