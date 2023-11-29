@@ -1,99 +1,103 @@
+// Orcamento.java
 package Entidades;
 
+import Interfaces.Imprimivel;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-//Orcamento.java
+public class Orcamento extends Documento implements Imprimivel {
+    private LocalDate dataCriacao;
+    private int garantia;
+    private int prazo;
+    private float pagamento;
+    private Cliente cliente;
+    private List<ItemOrcamento> itens;
 
+    public Orcamento(LocalDate dataCriacao, int garantia, int prazo, float pagamento, Cliente cliente) {
+        super(cliente.getNome());
+        this.dataCriacao = dataCriacao;
+        this.garantia = garantia;
+        this.prazo = prazo;
+        this.pagamento = pagamento;
+        this.cliente = cliente;
+        this.itens = new ArrayList<>();
+    }
 
-public class Orcamento
-{
- private LocalDate dataCriacao;
- private Integer garantia;
- private Integer prazo;
- private Float pagamento;
- private Cliente cliente;
- private List<ItemOrcamento> itens;
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
 
- public Orcamento(LocalDate dataCriacao, Integer garantia, Integer prazo, Float pagamento, Cliente cliente) {
-     this.dataCriacao = dataCriacao;
-     this.garantia = garantia;
-     this.prazo = prazo;
-     this.pagamento = pagamento;
-     this.cliente = cliente;
-     this.itens = new ArrayList<>();
- }
+    public int getGarantia() {
+        return garantia;
+    }
 
- public LocalDate getDataCriacao() {
-     return dataCriacao;
- }
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
+    }
 
- public void setDataCriacao(LocalDate dataCriacao) {
-     this.dataCriacao = dataCriacao;
- }
+    public int getPrazo() {
+        return prazo;
+    }
 
- public Integer getGarantia() {
-     return garantia;
- }
+    public void setPrazo(int prazo) {
+        this.prazo = prazo;
+    }
 
- public void setGarantia(Integer garantia) {
-     this.garantia = garantia;
- }
+    public float getPagamento() {
+        return pagamento;
+    }
 
- public Integer getPrazo() {
-     return prazo;
- }
+    public void setPagamento(float pagamento) {
+        this.pagamento = pagamento;
+    }
 
- public void setPrazo(Integer prazo) {
-     this.prazo = prazo;
- }
+    public Cliente getCliente() {
+        return cliente;
+    }
 
- public Float getPagamento() {
-     return pagamento;
- }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
- public void setPagamento(Float pagamento) {
-     this.pagamento = pagamento;
- }
+    public List<ItemOrcamento> getItens() {
+        return itens;
+    }
 
- public Cliente getCliente() {
-     return cliente;
- }
+    public void adicionarItem(ItemOrcamento item) {
+        itens.add(item);
+    }
 
- public void setCliente(Cliente cliente) {
-     this.cliente = cliente;
- }
+    public double calcularValorTotal() {
+        return itens.stream().mapToDouble(item -> item.getPedido().getValor()).sum();
+    }
 
- public List<ItemOrcamento> getItens() {
-     return Collections.unmodifiableList(itens);
- }
+    public double calcularTotalOrcamento() {
+        double valorItens = calcularValorTotal();
+        return valorItens + (valorItens * (pagamento / 100.0));
+    }
 
- public void adicionarItem(ItemOrcamento item) {
-     this.itens.add(item);
- }
+    @Override
+    public void imprimir() {
+        System.out.println("===== Detalhes do Orçamento =====");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("Endereço: " + cliente.getEndereco());
+        System.out.println("Data de Criação: " + dataCriacao);
+        System.out.println("Garantia: " + garantia + " meses");
+        System.out.println("Prazo de Pagamento: " + prazo + " dias");
+        System.out.println("Condições de Pagamento: " + pagamento + "%");
 
- @Override
- public String toString() {
-     return "Orcamento{" +
-             "dataCriacao=" + dataCriacao +
-             ", garantia=" + garantia +
-             ", prazo=" + prazo +
-             ", pagamento=" + pagamento +
-             ", cliente=" + cliente +
-             ", itens=" + itens +
-             '}';
- }
+        System.out.println("===== Itens do Orçamento =====");
+        System.out.println("Descrição \t\t Valor");
+        for (ItemOrcamento item : itens) {
+            Pedido pedido = item.getPedido();
+            System.out.printf("%-20s \t %.2f\n", pedido.getDescricao(), pedido.getValor());
+        }
 
- public double calcularValorTotal() {
-     return itens.stream().mapToDouble(ItemOrcamento::getValor).sum();
- }
-
-public void imprimirOrcamento() {
-	// TODO Auto-generated method stub
-	
+        System.out.println("===== Resumo do Orçamento =====");
+        System.out.println("Valor Total dos Itens: " + calcularValorTotal());
+        System.out.println("Total do Orçamento: " + calcularTotalOrcamento());
+        System.out.println();
+    }
 }
-}
-
