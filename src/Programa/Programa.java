@@ -17,6 +17,7 @@ public class Programa {
 
     public static void main(String[] args) {
         int opcao;
+        Exemplos.criarOrcamentosDefault(orcamentos);
         do {
             exibirMenu();
             opcao = scanner.nextInt();
@@ -46,7 +47,12 @@ public class Programa {
         } while (opcao != 0);
     }
 
-    private static void exibirMenu() {
+    private static void criarOrcamentosDefault(List<Orcamento> orcamentos2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void exibirMenu() {
         System.out.println("===== Menu =====");
         System.out.println("1. Adicionar Orçamento");
         System.out.println("2. Excluir Orçamento");

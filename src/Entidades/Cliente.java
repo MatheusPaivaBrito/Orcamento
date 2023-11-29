@@ -15,8 +15,4 @@ public class Cliente extends Documento {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3a0f86e92fc5057053f121b08cece8e3b7b087fb

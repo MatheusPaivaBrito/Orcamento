@@ -86,7 +86,7 @@ public class Orcamento extends Documento implements Imprimivel {
         System.out.println("Data de Criação: " + dataCriacao);
         System.out.println("Garantia: " + garantia + " meses");
         System.out.println("Prazo de Pagamento: " + prazo + " dias");
-        System.out.println("Condições de Pagamento: " + pagamento + "%");
+        System.out.println("Tributação em porcentagem: " + pagamento + "%");
 
         System.out.println("===== Itens do Orçamento =====");
         System.out.println("Descrição \t\t Valor");
