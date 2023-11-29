@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class Programa {
     private static List<Orcamento> orcamentos = new ArrayList<>();
@@ -86,9 +87,10 @@ public class Programa {
         System.out.print("Tributação em %: ");
         float pagamento = scanner.nextFloat();
 
-        System.out.print("Data de Criação (AAAA-MM-DD): ");
+        System.out.print("Data de Criação (DD/MM/AAAA): ");
         String dataCriacaoStr = scanner.next();
-        LocalDate dataCriacao = LocalDate.parse(dataCriacaoStr);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataCriacao = LocalDate.parse(dataCriacaoStr, formatter);        
 
         Orcamento novoOrcamento = new Orcamento(dataCriacao, garantia, prazo, pagamento, cliente);
 

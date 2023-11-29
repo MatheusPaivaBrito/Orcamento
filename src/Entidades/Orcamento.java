@@ -6,6 +6,7 @@ import Interfaces.Imprimivel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class Orcamento extends Documento implements Imprimivel {
     private LocalDate dataCriacao;
@@ -83,7 +84,8 @@ public class Orcamento extends Documento implements Imprimivel {
         System.out.println("===== Detalhes do Orçamento =====");
         System.out.println("Cliente: " + cliente.getNome());
         System.out.println("Endereço: " + cliente.getEndereco());
-        System.out.println("Data de Criação: " + dataCriacao);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("Data de Criação: " + dataCriacao.format(formatter));
         System.out.println("Garantia: " + garantia + " meses");
         System.out.println("Prazo de Pagamento: " + prazo + " dias");
         System.out.println("Tributação em porcentagem: " + pagamento + "%");
