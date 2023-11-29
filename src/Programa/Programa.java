@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Programa {
     private static List<Orcamento> orcamentos = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
-    criarOrcamentosDefault(orcamentos);
+
 
     public static void main(String[] args) {
         int opcao;
