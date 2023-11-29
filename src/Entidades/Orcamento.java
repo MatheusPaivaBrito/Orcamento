@@ -27,6 +27,18 @@ public class Orcamento
      this.itens = new ArrayList<>();
  }
 
+ public void imprimirOrcamento() {
+     System.out.println("Data de criação: " + dataCriacao);
+     System.out.println("Garantia: " + garantia);
+     System.out.println("Prazo: " + prazo);
+     System.out.println("Pagamento: " + pagamento);
+     System.out.println("Cliente: " + cliente);
+     System.out.println("Itens: ");
+     for (ItemOrcamento item : itens) {
+         System.out.println(item);
+     }
+ }
+
  public LocalDate getDataCriacao() {
      return dataCriacao;
  }
@@ -90,10 +102,5 @@ public class Orcamento
  public double calcularValorTotal() {
      return itens.stream().mapToDouble(ItemOrcamento::getValor).sum();
  }
-
-public void imprimirOrcamento() {
-	// TODO Auto-generated method stub
-	
-}
 }
 

@@ -216,7 +216,7 @@ public class Programa {
     } else {
         for (int i = 0; i < orcamentos.size(); i++) {
             System.out.println("Orçamento #" + i);
-            orcamentos.get(i).imprimirOrcamento(); // This will now also print the description
+            orcamentos.get(i).imprimirOrcamento(); // This will now print all the data
             System.out.println();
         }
     }
